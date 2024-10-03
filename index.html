@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Enfermedad de Kennedy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f6f8fc;
+            overflow: hidden; /* Evitar scroll en la página completa */
+        }
+
+        .scroll-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto; /* Permite la barra de desplazamiento */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 50px;
+        }
+
+        .container:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            padding: 30px;
+            color: white;
+        }
+
+        .input-box {
+            margin: 30px 0;
+            padding: 15px;
+        }
+
+        .input-box input {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+        }
+
+        button {
+            background: #3b82f6;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        .quiz-container, .result-container {
+            display: none;
+        }
+
+        .quiz-container h1 {
+            color: #3b82f6;
+        }
+
+        .question {
+            margin: 20px 0;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .options input {
+            margin-right: 10px;
+        }
+
+        .timer {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #e74c3c;
+        }
+
+        .result-container h1 {
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .progress {
+            height: 10px;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-container">
+        <div class="container">
+            <!-- Pantalla de bienvenida -->
+            <div class="welcome-container">
+                <div class="header">
+                    <h1>Bienvenido a la actividad sobre la Enfermedad de Kennedy</h1>
+                </div>
+                <div class="input-box">
+                    <input type="text" id="participantName" placeholder="Ingresa tu nombre">
+                </div>
+                <button onclick="startQuiz()">Continuar</button>
+            </div>
+
+            <!-- Pantalla del cuestionario -->
+            <div class="quiz-container">
+                <h1>ENFERMEDAD DE KENNEDY</h1>
+                <h2>Responde las preguntas lo más rápido posible</h2>
+                <div id="timer" class="timer">Tiempo restante: 60 segundos</div>
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+
+                <div class="question">
+                    <p>1. ¿Cuál es el gen afectado en la enfermedad de Kennedy?</p>
+                    <div class="options">
+                        <input type="radio" name="q1" value="Gen receptor de andrógenos"> Gen receptor de andrógenos<br>
+                        <input type="radio" name="q1" value="Xp11-10"> Xp11-10<br>
+                        <input type="radio" name="q1" value="Gene ALD"> Gene ALD<br>
+                        <input type="radio" name="q1" value="MTFMT"> MTFMT<br>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>2. ¿Cuál no es una característica de esta enfermedad?</p>
+                    <div class="options">
+                        <input type="radio" name="q2" value="Que es de rápida evolución"> Que es de rápida evolución<br>
+                        <input type="radio" name="q2" value="Atrofia muscular"> Atrofia muscular<br>
+                        <input type="radio" name="q2" value="Debilidad bulbar"> Debilidad bulbar<br>
+                        <input type="radio" name="q2" value="Disfunción deglutoria"> Disfunción deglutoria<br>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p>3. ¿Por qué los pacientes que la padecen pueden fallecer a temprana edad?</p>
+                    <div class="options">
+                        <input type="radio" name="q3" value="Por insuficiencia cardíaca"> Por insuficiencia cardíaca<br>
+                        <input type="radio" name="q3" value="Debido a la broncoaspiración que genera la disfunción de la deglución"> Debido a la broncoaspiración que genera la disfunción de la deglución<br>
+                        <input type="radio" name="q3" value="Cáncer de colon"> Cáncer de colon<br>
+                        <input type="radio" name="q3" value="Parálisis respiratoria"> Parálisis respiratoria<br>
+                    </div>
+                </div>
+
+                <button onclick="finishQuiz()">Finalizar</button>
+            </div>
+
+            <!-- Pantalla de resultados -->
+            <div class="result-container">
+                <h1 id="resultTitle"></h1>
+                <p id="resultMessage"></p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let timeLeft = 60;
+    let timerInterval;
+    let participantName = '';
+
+    function startQuiz() {
+        participantName = document.getElementById("participantName").value;
+        if (participantName.trim() === '') {
+            alert('Por favor, ingresa tu nombre');
+            return;
+        }
+        document.querySelector('.welcome-container').style.display = 'none';
+        document.querySelector('.quiz-container').style.display = 'block';
+
+        const timerElement = document.getElementById("timer");
+        const progressElement = document.getElementById("progress");
+        timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                finishQuiz();
+            }
+            timerElement.innerHTML = "Tiempo restante: " + timeLeft + " segundos";
+            progressElement.style.width = (60 - timeLeft) * (100 / 60) + "%";
+            timeLeft--;
+        }, 1000);
+    }
+
+    function finishQuiz() {
+        clearInterval(timerInterval);
+        const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+        const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+        const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+
+        let correctAnswers = 0;
+        if (q1 === "Gen receptor de andrógenos") correctAnswers++;
+        if (q2 === "Que es de rápida evolución") correctAnswers++;
+        if (q3 === "Debido a la broncoaspiración que genera la disfunción de la deglución") correctAnswers++;
+
+        const resultTitle = document.getElementById('resultTitle');
+        const resultMessage = document.getElementById('resultMessage');
+
+        resultTitle.innerHTML = participantName;
+        resultMessage.innerHTML = `Respuestas correctas: ${correctAnswers}/3.`;
+        document.querySelector('.quiz-container').style.display = 'none';
+        document.querySelector('.result-container').style.display = 'block';
+    }
+</script>
+</body>
+</html>
