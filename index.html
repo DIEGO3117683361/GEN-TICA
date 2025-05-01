@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es" data-theme="dark">
 <head>
@@ -12,9 +14,9 @@
             --text-primary: #1d1d1f;
             --accent: #828282;
             --border-color: #d2d2d7;
-            --message-bg: #e8e8ed;
-            --user-message-bg: #2c2c2e;
-            --user-message-text: #ffffff;
+            --message-bg: #ffffff;
+            --user-message-bg: #f5f2ed;
+            --user-message-text: #000000;
             --vision-gradient: linear-gradient(45deg, #696969, #000000, #373737, #000000);
             --welcome-color: #888888;
             --image-btn-color: #FF6B6B;
@@ -30,9 +32,9 @@
             --text-primary: #f5f5f7;
             --accent: #828282;
             --border-color: #48484a;
-            --message-bg: #2c2c2e;
-            --user-message-bg: #d2d2d7;
-            --user-message-text: #2c2c2e;
+            --message-bg:#1d1d1f;
+            --user-message-bg: #2e2e2e;
+            --user-message-text: #ffffff;
             --vision-gradient: linear-gradient(45deg, #a1a1a1, #4a4a4a, #7d7d7d, #4a4a4a);
             --welcome-color: #666666;
             --attachment-indicator-bg: #c49a1d;
@@ -52,7 +54,7 @@
             color: var(--text-primary);
             display: flex;
             height: 100vh;
-            overflow: hidden;
+            overflow: auto; /* ✅ o directamente elimínalo si no es esencial */
         }
 
         .sidebar {
@@ -1187,31 +1189,378 @@
             100% { transform: translateX(100%) rotate(45deg); }
         }
 .message-markdown table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
-    margin: 12px 0;
+    margin: 16px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    background-color: var(--primary-bg);
 }
 
 .message-markdown th,
 .message-markdown td {
-    border: 1px solid var(--border-color);
-    padding: 8px 12px;
+    padding: 12px 16px;
     text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease;
 }
 
 .message-markdown th {
     background-color: var(--secondary-bg);
-    font-weight: bold;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+}
+
+.message-markdown tr:hover td {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.message table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+.message-markdown th,
+.message-markdown td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.message-markdown th {
+    background-color: var(--secondary-bg);
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.message-markdown tr:hover td {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.message.user-message {
+  align-self: flex-end;
+}
+
+.message.bot-message {
+  align-self: flex-start;
+}
+.settings-button svg.brain-icon {
+  stroke: var(--text-primary);
+  transition: stroke 0.3s ease;
+}
+.vision-button, .msearch-button {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.vision-button:hover, .msearch-button:hover {
+  background-color: var(--primary-bg);
+}
+.active-button {
+  border: 2px solid #4D9EF7; /* Borde azul */
+  background-color: var(--primary-bg); /* Fondo personalizado */
+  color: var(--text-primary); /* Color del texto */
+  box-shadow: 0 0 8px rgba(77, 158, 247, 0.6); /* Sombra azul */
+  transition: all 0.3s ease; /* Transición suave */
+}
+.file-reading-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    background: #f0f4ff;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+}
+.smart-eye {
+    width: 32px;
+    height: 32px;
+    position: relative;
+}
+.eye-container {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #3a7bd5, #00d2ff);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+    animation: float 3s ease-in-out infinite;
+}
+.eyeball {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    animation: look-around 4s infinite alternate;
+}
+.pupil {
+    width: 8px;
+    height: 8px;
+    background: #222;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pupil-move 2s infinite alternate;
+}
+.eyelid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #3a7bd5, #00d2ff);
+    border-radius: 50%;
+    top: -100%;
+    animation: blink 5s infinite;
+}
+.scanning-beam {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.7);
+    top: 0;
+    left: 0;
+    transform-origin: top center;
+    animation: scan 2s infinite;
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+.loading-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    position: relative;
+}
+.loading-text::after {
+    content: '...';
+    position: absolute;
+    animation: dots 1.5s infinite steps(4, end);
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+@keyframes look-around {
+    0% { transform: translate(-30%, -50%); }
+    25% { transform: translate(-70%, -50%); }
+    50% { transform: translate(-50%, -30%); }
+    75% { transform: translate(-50%, -70%); }
+    100% { transform: translate(-30%, -50%); }
+}
+@keyframes pupil-move {
+    0%, 100% { transform: translate(-30%, -30%); }
+    25% { transform: translate(-70%, -30%); }
+    50% { transform: translate(-70%, -70%); }
+    75% { transform: translate(-30%, -70%); }
+}
+@keyframes blink {
+    0%, 45%, 50%, 55%, 100% { top: -100%; }
+    48%, 52% { top: 0; }
+}
+@keyframes scan {
+    0% { transform: rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: rotate(360deg); opacity: 0; }
+}
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+.advanced-settings-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.advanced-settings-modal.active {
+  display: flex;
+}
+.settings-content {
+  background: var(--secondary-bg);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.close-settings {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.settings-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.tab-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.tab-button.active {
+  background-color: var(--accent);
+  color: white;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.settings-body label {
+  display: block;
+  margin: 6px 0;
+}
+.settings-body button {
+  margin: 10px 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.settings-body button:hover {
+  opacity: 0.9;
+}
+#toneSelector {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23828282" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+#toneSelector:hover {
+  border-color: var(--accent);
+}
+
+#toneSelector:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(77, 158, 247, 0.4);
+}
+.table-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.table-modal.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.table-modal-content {
+  background: var(--primary-bg);
+  max-width: 90%;
+  max-height: 80%;
+  overflow: auto;
+  padding: 20px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.table-modal-content table {
+  width: 100%;
+}
+
+.table-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.table-modal-content {
+  background: var(--message-bg);
+  padding: 30px;
+  border: 1px solid var(--border-color);
 }
 
     </style>
-
-<!-- ESTE ES EL NUEVO BLOQUE PARA ASCLEPIO CON FIREBASE INTEGRADO -->
-<!-- Agregar esto dentro del <head> de tu archivo HTML -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDhUyDQHm4rYrmN0AMh_Jw_WIo0Nev-Kas",
@@ -1219,83 +1568,65 @@
     projectId: "asclepiouser-120dc",
     storageBucket: "asclepiouser-120dc.firebasestorage.app",
     messagingSenderId: "91797934913",
-    appId: "1:91797934913:web:f6634127f41f95898e87c0"
+    appId: "1:91797934913:web:f6634127f41f95898e87c0",
+    measurementId: "G-JZZFMW9H6Z"
   };
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const provider = new GoogleAuthProvider();
 
-  window.firebaseApp = {
-    auth,
-    db,
-    onAuthStateChanged,
-    signInWithPopup,
-    GoogleAuthProvider,
-    signOut,
-    doc,
-    setDoc,
-    getDoc,
-    updateDoc,
-    collection,
-    getDocs,
-    deleteDoc
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      document.getElementById("loginScreen").style.display = "none";
+      document.querySelector("main").style.display = "flex";
+      document.getElementById("profileName").textContent = user.displayName;
+      document.getElementById("profileEmail").textContent = user.email;
+      document.getElementById("profilePhoto").src = user.photoURL;
+      await loadUserChats(user.uid);
+    } else {
+      document.getElementById("loginScreen").style.display = "flex";
+      document.querySelector("main").style.display = "none";
+    }
+  });
+
+  window.loginWithGoogle = function () {
+    signInWithPopup(auth, provider).catch(console.error);
   };
 
-  // AUTENTICACIÓN Y CARGA INICIAL
-  window.addEventListener('DOMContentLoaded', async () => {
-    const loginScreen = document.createElement('div');
-    loginScreen.innerHTML = `
-      <div id="authContainer" style="height: 100vh; display: flex; justify-content: center; align-items: center; background: #1d1d1f; color: white;">
-        <div style="text-align: center;">
-          <h1 style="margin-bottom: 20px;">Bienvenido a ASCLEPIO</h1>
-          <button id="loginGoogle" style="padding: 12px 20px; font-size: 16px; border-radius: 8px; background-color: #4ECDC4; border: none; cursor: pointer;">Iniciar sesión con Google</button>
-        </div>
-      </div>
-    `;
-    document.body.prepend(loginScreen);
-    document.querySelector('main').style.display = 'none';
+  window.logout = function () {
+    signOut(auth);
+  };
 
-    const { onAuthStateChanged, auth, signInWithPopup, GoogleAuthProvider, db, getDocs, collection } = window.firebaseApp;
+  async function saveUserChats(uid) {
+    await setDoc(doc(db, "users", uid), { chats });
+  }
 
-    document.getElementById("loginGoogle").onclick = async () => {
-      try {
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
-      } catch (err) {
-        alert("Error al iniciar sesión: " + err.message);
-      }
-    };
+  async function loadUserChats(uid) {
+    const snap = await getDoc(doc(db, "users", uid));
+    if (snap.exists()) {
+      chats = snap.data().chats || [];
+      renderChatList();
+      createNewChat();
+    }
+  }
 
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        document.getElementById("authContainer").remove();
-        document.querySelector("main").style.display = 'flex';
-        await loadChatsFromFirestore();
-        createNewChat();
-        renderChatList();
-      }
-    });
-
-    // REEMPLAZAR FUNCIONES DE CARGA Y GUARDADO DE CHATS
-    window.loadChats = async function loadChatsFromFirestore() {
-      const user = auth.currentUser;
-      const querySnapshot = await getDocs(collection(db, `users/${user.uid}/chats`));
-      chats = [];
-      querySnapshot.forEach(doc => chats.push(doc.data()));
-    };
-
-    window.saveChats = async function saveChatsToFirestore() {
-      const user = auth.currentUser;
-      for (const chat of chats) {
-        await setDoc(doc(db, `users/${user.uid}/chats`, chat.id), chat);
-      }
-    };
-  });
+  setInterval(() => {
+    if (auth.currentUser) {
+      saveUserChats(auth.currentUser.uid);
+    }
+  }, 3000);
 </script>
 
 </head>
 <body>
+<div id="loginScreen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: var(--primary-bg); color: var(--text-primary);">
+  <h2>Bienvenido a ASCLEPIO 🧠</h2>
+  <p>Inicia sesión para guardar tus chats en la nube</p>
+  <button onclick="loginWithGoogle()" style="margin-top: 20px; font-size: 16px; padding: 10px 20px;">🔐 Iniciar sesión con Google</button>
+</div>
+
     <div class="html-preview-modal" id="htmlPreviewModal">
         <div class="html-preview-content">
             <div class="html-preview-header">
@@ -1336,12 +1667,27 @@
         </div>
     </aside>
 
-    <main class="main-content">
+    <main class="main-content" style="display: none;">
         <header class="header">
             <button class="menu-button" onclick="toggleSidebar()">☰</button>
             <div class="app-title">A S C L E P I O</div>
-            <div class="settings-menu">
-                <button class="settings-button" onclick="toggleSettings()">⚙️</button>
+        <div class="settings-menu">
+    <button class="settings-button" onclick="openAdvancedSettings()" aria-label="Ajustes">
+  <svg class="brain-icon" xmlns="http://www.w3.org/2000/svg"
+       width="24" height="24" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2" stroke-linecap="round"
+       stroke-linejoin="round">
+    <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+    <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+    <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+    <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/>
+    <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/>
+    <path d="M3.477 10.896a4 4 0 0 1 .585-.396"/>
+    <path d="M19.938 10.5a4 4 0 0 1 .585.396"/>
+    <path d="M6 18a4 4 0 0 1-1.967-.516"/>
+    <path d="M19.967 17.484A4 4 0 0 1 18 18"/>
+  </svg>
+</button>
                 <div class="settings-dropdown" id="settingsDropdown">
                     <div class="dropdown-item" onclick="toggleTheme()">
                         <span>🔆</span> Cambiar tema
@@ -1356,36 +1702,130 @@
             </div>
         </header>
 
-        <div class="chat-container" id="messages">
+      <div class="chat-container">
+  <div class="message-wrapper" id="messages"></div>
+</div>
+
             <div class="attachment-indicator" id="attachmentIndicator">
                 <span class="attachment-name" id="attachmentName"></span>
                 <button class="attachment-close" onclick="clearAttachment()">✕</button>
             </div>
         </div>
 
-        <div class="input-container" id="inputContainer">
-            <div class="image-generation-confirmation hidden" id="imageGenerationConfirmation">
-                <div class="confirmation-text">¿Quieres que Asclepio te responda con un concepto visual?</div>
-                <button class="confirm-button" onclick="confirmImageGeneration()">✓</button>
-                <button class="cancel-button" onclick="cancelImageGeneration()">✕</button>
-            </div>
-            <div class="input-wrapper">
-                <button class="attachment-button" id="attachmentButton" onclick="toggleAttachment()">
-                    <svg id="attachmentIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-                <div class="input-box">
-                    <input type="text" class="message-input" id="userInput" placeholder="Pregunta lo que quieras" autocomplete="off">
-                    <button class="send-button" onclick="sendMessage()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 19V5M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
+       <div class="input-container" id="inputContainer">
+  <!-- ⚠️ Mantener el mensaje flotante para Visión -->
+  <div class="image-generation-confirmation hidden" id="imageGenerationConfirmation">
+    <div class="confirmation-text">¿Quieres que Asclepio te responda con un concepto visual?</div>
+    <button class="confirm-button" onclick="confirmImageGeneration()">✓</button>
+    <button class="cancel-button" onclick="cancelImageGeneration()">✕</button>
+  </div>
+
+  <!-- 📝 Caja de texto y enviar -->
+  <div class="input-wrapper" style="flex-direction: column; gap: 10px;">
+    <div class="input-box" style="width: 100%;">
+      <input type="text" class="message-input" id="userInput" placeholder="Pregunta lo que quieras" autocomplete="off" />
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 10px;">
+  <!-- Botones izquierda -->
+  <div style="display: flex; gap: 10px;">
+  <button class="msearch-button" id="msearchButton" onclick="toggleActiveButton('msearchButton')">🌐 Msearch</button>
+  <button class="vision-button" id="visionButton" onclick="toggleActiveButton('visionButton')">VISION</button>
+</div>
+
+
+  <!-- Botones derecha -->
+  <div style="display: flex; gap: 10px;">
+    <button class="attachment-button" id="attachmentButton" onclick="toggleAttachment()">
+      <svg id="attachmentIcon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+
+    <button class="send-button" onclick="sendMessage()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+        <path d="m21.854 2.147-10.94 10.939"/>
+      </svg>
+    </button>
+  </div>
+</div>
+  </div>
+</div>
+
                 <input type="file" id="attachmentInput" accept=".pdf,image/*" style="display: none;">
             </div>
         </div>
+<div class="advanced-settings-modal" id="advancedSettingsModal">
+  <div class="settings-content">
+    <div class="settings-header">
+      <h2>Configuración</h2>
+      <button class="close-settings" onclick="closeAdvancedSettings()">✕</button>
+    </div>
+    <div class="settings-tabs">
+      <button class="tab-button active" onclick="showSettingsTab('generalTab')">General</button>
+      <button class="tab-button" onclick="showSettingsTab('personalizationTab')">Personalización</button>
+      <button class="tab-button" onclick="showSettingsTab('profileTab')">Mi Perfil</button>
+    </div>
+    <div class="settings-body">
+      <div id="generalTab" class="tab-content active">
+        <h3>Tema</h3>
+        <label><input type="radio" name="theme" value="light"> Claro</label><br>
+        <label><input type="radio" name="theme" value="dark"> Oscuro</label><br>
+        <label><input type="radio" name="theme" value="auto"> Dispositivo</label><br>
+        <hr>
+        <button onclick="clearChat()">Vaciar chat actual</button>
+        <button onclick="deleteAllChats()">Eliminar todos los chats</button>
+      </div>
+      <div id="personalizationTab" class="tab-content">
+        <h3>Tono de respuesta</h3>
+        <select id="toneSelector" onchange="setResponseTone()">
+          <option value="tradicional">Tradicional</option>
+          <option value="profesional">Profesional</option>
+          <option value="medico">Experto en medicina</option>
+          <option value="amable">Amable e inteligente</option>
+          <option value="educador">Educador</option>
+        </select>
+        <p style="margin-top: 10px; font-style: italic; color: var(--accent);">Próximamente más opciones de personalización...</p>
+      </div>
+      <div id="profileTab" class="tab-content">
+  <h3>Mi Perfil</h3>
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+    <img id="profilePhoto" src="" alt="Foto de perfil" style="width: 50px; height: 50px; border-radius: 50%;">
+    <div>
+      <strong id="profileName">Nombre</strong><br>
+      <span id="profileEmail" style="font-size: 14px; color: var(--accent);">Correo</span>
+    </div>
+  </div>
+  <button onclick="logout()">🚪 Cerrar sesión</button>
+</div>
+
+    </div>
+  </div>
+</div>
+<button id="scrollToBottomBtn" style="
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background-color: var(--secondary-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 999;
+">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+       stroke="currentColor" stroke-width="2" stroke-linecap="round"
+       stroke-linejoin="round" class="lucide lucide-chevron-down">
+    <path d="m6 9 6 6 6-6"/>
+  </svg>
+</button>
+
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
@@ -1467,7 +1907,7 @@
                 } else if (file.type.startsWith('image/')) {
                     extractedText = await extractTextFromImage(file);
                 } else {
-                    alert('Por favor, selecciona un PDF o una imagen.');
+                    alert('Por favor, selecciona un PDF o una imagen que contenga texto.');
                     return;
                 }
 
@@ -1493,18 +1933,27 @@
         }
 
         function showDocumentProcessingAnimation() {
-            const processingDiv = document.createElement('div');
-            processingDiv.className = 'document-processing';
-            processingDiv.innerHTML = `
-                <div class="doc-scanner">
-                    <div class="scanner-bar"></div>
+    const processingDiv = document.createElement('div');
+    processingDiv.className = 'document-processing';
+    processingDiv.innerHTML = `
+        <div class="file-reading-indicator">
+            <div class="smart-eye">
+                <div class="eye-container">
+                    <div class="scanning-beam"></div>
+                    <div class="eyeball">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eyelid"></div>
                 </div>
-                <div class="loading-text">Leyendo archivos...</div>
-            `;
-            messagesContainer.appendChild(processingDiv);
-            scrollToBottom();
-            return processingDiv;
-        }
+            </div>
+            <span class="loading-text">Procesando archivo</span>
+        </div>
+    `;
+    messagesContainer.appendChild(processingDiv);
+    scrollToBottom();
+    return processingDiv;
+}
+
 
         function hideDocumentProcessingAnimation(element) {
             if (element) {
@@ -1608,13 +2057,13 @@
                                 </svg>
                                 Crea una imagen
                             </button>
-                            <button class="welcome-btn welcome-btn-code" onclick="setInputText('Escribir un código')">
+                            <button class="welcome-btn welcome-btn-code" onclick="setInputText('Escribir un código de programación')">
                                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 20L14 4M18 8L22 12L18 16M6 16L2 12L6 8" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                Crear un código
+                                Escribir código
                             </button>
-                            <button class="welcome-btn welcome-btn-analyze" onclick="setInputText('Analiza el texto y dame un resumen en puntos clave')">
+                            <button class="welcome-btn welcome-btn-analyze" onclick="setInputText('Analiza a profundidad el contenido de este archivo define que tipo de información contiene y en base a eso explíca y uedes usar líneas divisorias, tablas, Puntos clave y conclusiones. Lo importante es que se entienda bien, con un análisis completo y bien desarrollado del contenido.')">
                                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M12 8V12L15 15" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1652,6 +2101,10 @@
                 sidebar.style.boxShadow = '10px 0 20px rgba(0, 0, 0, 0.1)';
             }
         }
+function toggleActiveButton(buttonId) {
+  const button = document.getElementById(buttonId);
+  button.classList.toggle('active-button'); // Alterna la clase 'active-button'
+}
 
         function toggleSidebar() {
             sidebar.classList.toggle('sidebar-visible');
@@ -1777,10 +2230,21 @@
             hasUserSentMessage = true;
 
             let fullMessageText = messageText;
+if (currentChat.messages.length === 0) {
+  const tone = localStorage.getItem('asclepioTone');
+  if (tone === 'profesional') {
+    fullMessageText = "Responde siempre con un tono profesional y claro, siempre de manera muy elegante. Utiliza un lenguaje formal pero accesible, evitando jargon innecesario.\n\nSi la información requiere estructuración compleja (comparaciones, datos numéricos, pasos detallados, etc.), puedes organizarla en tablas o con líneas divisoras gráficas para mejorar la legibilidad. Sin embargo, evítalas si el contenido es breve o no lo amerita.\n\nPrioriza la claridad y la eficiencia en tus respuestas, adaptándote al contexto de la consulta.\n\n" + fullMessageText;
+  } else if (tone === 'medico') {
+    fullMessageText = "Responde todo como un experto médico, utilizando terminología clínica precisa y basándote en evidencia científica. Mantén un tono profesional y accesible para colegas del ámbito sanitario, puedes emplear emojis solo si refuerzan la claridad, además usa tablas, líneas divisoras para mejorar la legibilidad en caso de ser necesarias además cuando se pregunte un tema en específico comparte links en donde el usuario pueda ampliar esa información\n\n" + fullMessageText;
+  } else if (tone === 'amable') {
+    fullMessageText = "Quiero que respondas como un amigo experto 🤓: claro, súper amable y 100% enfocado en que entienda todo fácilmente. Usa explicaciones sencillas (sin tecnicismos innecesarios), emojis para hacerlo más divertido 🚀✨ y tablas o gráficos solo si ayudan a visualizar mejor (ej.: pasos, comparaciones). También verifica si entendí, ofreciendo ampliar info con frases como '¿Quedó claro o lo explico de otra forma? 🔍' o '¿Quieres que profundice en algo? 🛠️', y si algo es complejo, simplifícalo como si fuera una charla entre amigos. Prioriza hacerme sentir que aprendo sin esfuerzo, usando ejemplos cotidianos y un tono motivador (ej.: '¡Buena pregunta! 👀 Aquí va el dato clave…'). Si dudas, elige la opción más clara, no la más técnica. ¡Haz que el conocimiento se sienta ligero y entretenido! 😎\n\n" + fullMessageText;
+  }
+}
+
             let hasAttachment = false;
 
             if (lastExtractedText) {
-                fullMessageText = `${messageText}\n\n[Texto extraído del archivo]:\n${lastExtractedText}`;
+                fullMessageText = `${messageText}\n\n[MENSAJE PARA MEJOR ENTENDIMIENTO: EL USUARIO CARGÓ UN ARCHIVO Y DE SE ARCHIVO SE EXTRAJO EL SIGUIENTE TEXTO ASÍ QUE LA PREGUNTA DEBE RESPONDERSE EN BASE A ESTE TEXTO ANTES DE RESPONDER ANALÍZALO Y SI POR EJEMPLO CONTIENE PREGUNTAS RESUELVELAS DE MANERA ORDENADA Y SOLO CONTIENE INFORMACIÓN SOBRE UN TEMA RESPONDE LA PREGUNTA DEL USUARIO O HAZ UN RESUMEN]:\n${lastExtractedText}`;
                 hasAttachment = true;
             }
 
@@ -1794,40 +2258,41 @@
             renderMessage(userMessage);
             userInput.value = '';
 
-            if (generateImageFlag) {
-                const loadingElement = showImageLoadingAnimation();
-                try {
-                    const imageUrl = await generateImage(fullMessageText);
-                    const imageHtml = `
-                        <div class="generated-image-container">
-                            <img src="${imageUrl}" alt="Imagen generada por Asclepio" class="generated-image">
-                            <button class="download-button" onclick="downloadImage('${imageUrl}')">Descargar imagen</button>
-                            <div class="image-prompt">Prompt: "${messageText}"</div>
-                        </div>
-                    `;
-                    const botMessage = { 
-                        sender: 'bot', 
-                        text: imageHtml, 
-                        timestamp: new Date().toISOString(),
-                        isImage: true,
-                        imageUrl: imageUrl
-                    };
-                    currentChat.messages.push(botMessage);
-                    renderMessage(botMessage);
-                    setupImageInteractions();
-                } catch (error) {
-                    const errorMessage = { 
-                        sender: 'bot', 
-                        text: `No se pudo generar la imagen. Detalles: ${error.message}`, 
-                        timestamp: new Date().toISOString() 
-                    };
-                    currentChat.messages.push(errorMessage);
-                    renderMessage(errorMessage);
-                } finally {
-                    hideImageLoadingAnimation(loadingElement);
-                    generateImageFlag = false;
-                }
-            } else {
+            const isVisionMode = document.getElementById('visionButton').classList.contains('active-button');
+
+if (isVisionMode) {
+    const loadingElement = showImageLoadingAnimation();
+    try {
+        const imageUrl = await generateImage(fullMessageText);
+        const imageHtml = `
+            <div class="generated-image-container">
+                <img src="${imageUrl}" alt="Imagen generada por Asclepio" class="generated-image">
+                <button class="download-button" onclick="downloadImage('${imageUrl}')">Descargar imagen</button>
+                <div class="image-prompt">Prompt: "${messageText}"</div>
+            </div>
+        `;
+        const botMessage = {
+            sender: 'bot',
+            text: imageHtml,
+            timestamp: new Date().toISOString(),
+            isImage: true,
+            imageUrl: imageUrl
+        };
+        currentChat.messages.push(botMessage);
+        renderMessage(botMessage);
+        setupImageInteractions();
+    } catch (error) {
+        const errorMessage = {
+            sender: 'bot',
+            text: "¡Uy! La imagen se nos escapó como si tuviera patas 🎨💨. No se pudo crear esta vez, pero puedes intentar de nuevo en un rato… o empezar un nuevo chat y darle otra oportunidad a la inspiración digital 💫📷. Detalles: " + error.message,
+            timestamp: new Date().toISOString()
+        };
+        currentChat.messages.push(errorMessage);
+        renderMessage(errorMessage);
+    } finally {
+        hideImageLoadingAnimation(loadingElement);
+    }
+} else {
                 const typingIndicator = showTypingIndicator();
                 try {
                    const conversationHistory = currentChat.messages
@@ -1837,7 +2302,8 @@
 const response = await fetch('https://magicloops.dev/api/loop/1f758d92-e471-4272-b993-b7db9f72a008/run', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ question: conversationHistory + '\nUsuario: ' + messageText })
+    body: JSON.stringify({ question: conversationHistory + '\nUsuario: ' + fullMessageText })
+
 });
 
                     const responseData = await response.json();
@@ -1846,7 +2312,7 @@ const response = await fetch('https://magicloops.dev/api/loop/1f758d92-e471-4272
                     currentChat.messages.push(botMessage);
                     typeMessage(botMessage);
                 } catch (error) {
-                    const errorMessage = { sender: 'bot', text: "Error al conectar con la API. Por favor intenta nuevamente.", timestamp: new Date().toISOString() };
+                    const errorMessage = { sender: 'bot', text: "¡Ups! Asclepio se fue a tomar un cafecito con el Wi-Fi ☕📡... Parece que la conexión se nos resbaló como jabón en regadera. Intenta de nuevo en unos segundos, o intenta crear un nuevo chat y cruzamos los dedos", timestamp: new Date().toISOString() };
                     currentChat.messages.push(errorMessage);
                     typeMessage(errorMessage);
                 } finally {
@@ -2147,17 +2613,16 @@ const response = await fetch('https://magicloops.dev/api/loop/1f758d92-e471-4272
             imageGenerationConfirmation.classList.add('hidden');
         }
 
-        function confirmImageGeneration() {
-            generateImageFlag = true;
-            hideImageGenerationConfirmation();
-            sendMessage();
-        }
+       function confirmImageGeneration() {
+    const visionBtn = document.getElementById('visionButton');
+    visionBtn.classList.add('active-button'); // activa el botón de visión
+    imageGenerationConfirmation.classList.add('hidden'); // oculta el anuncio
+}
 
+ 
         function cancelImageGeneration() {
-            generateImageFlag = false;
-            hideImageGenerationConfirmation();
-            sendMessage();
-        }
+    imageGenerationConfirmation.classList.add('hidden'); // solo oculta el anuncio
+}
 
       function formatText(text) {
     if (typeof text !== 'string') return text;
@@ -2192,6 +2657,81 @@ const response = await fetch('https://magicloops.dev/api/loop/1f758d92-e471-4272
 
 
         init();
+function openAdvancedSettings() {
+  document.getElementById('advancedSettingsModal').classList.add('active');
+  const savedTone = localStorage.getItem('asclepioTone');
+  if (savedTone) document.getElementById('toneSelector').value = savedTone;
+}
+
+function closeAdvancedSettings() {
+  document.getElementById('advancedSettingsModal').classList.remove('active');
+}
+
+function showSettingsTab(tabId) {
+  const tabs = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+
+  const buttons = document.querySelectorAll('.tab-button');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function setResponseTone() {
+  const tone = document.getElementById('toneSelector').value;
+  localStorage.setItem('asclepioTone', tone);
+}
+
+// 👇 Aplicar tema desde la sección general
+document.querySelectorAll('input[name="theme"]').forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    const theme = e.target.value;
+    if (theme === 'auto') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+    localStorage.setItem('theme', theme);
+  });
+});
+const scrollBtn = document.getElementById('scrollToBottomBtn');
+const chatContainer = document.querySelector('.chat-container');
+
+chatContainer.addEventListener('scroll', () => {
+  const atBottom = chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 10;
+  scrollBtn.style.display = atBottom ? 'none' : 'block';
+});
+
+scrollBtn.addEventListener('click', () => {
+  chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
+});
+function openTableModal(tableHtml) {
+  const modal = document.getElementById("tableModal");
+  const content = document.getElementById("tableModalContent");
+  content.innerHTML = `<div class="message-markdown">${tableHtml}</div>`;
+  modal.classList.add("visible");
+}
+
+function closeTableModal() {
+  document.getElementById("tableModal").classList.remove("visible");
+}
+
+// Delegar clic en tablas dentro del contenedor de mensajes
+messagesContainer.addEventListener("click", (e) => {
+  const clickedTable = e.target.closest("table");
+  if (clickedTable && messagesContainer.contains(clickedTable)) {
+    openTableModal(clickedTable.outerHTML);
+  }
+});
+
     </script>
+<div id="tableModal" class="table-modal">
+  <div class="table-modal-content">
+    <button class="table-modal-close" onclick="closeTableModal()">✕</button>
+    <div id="tableModalContent"></div>
+  </div>
+</div>
+
 </body>
 </html>
